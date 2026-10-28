@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Herramientas from '../components/Herramientas.astro';
+import { Image } from 'astro:assets';
+import foto from '../assets/sobre-mi/foto.webp';
 
 const stats = [
   { etiqueta: 'Clase', valor: 'Diseñadora + programadora' },
@@ -39,10 +41,14 @@ const stats = [
 
       <aside class="col-lg-4 offset-lg-1" aria-label="Ficha de personaje">
         <div class="ficha" data-entrada>
-          <!-- shortcut: foto placeholder, reemplazar por <Image> con la foto real -->
-          <div class="foto" role="img" aria-label="Foto de Amelia Duclos (pendiente)">
-            <span aria-hidden="true">Foto pendiente</span>
-          </div>
+          <Image
+            src={foto}
+            alt="Retrato de Amelia Duclos sonriendo, con el pelo oscuro suelto y un suéter blanco"
+            widths={[320, 480, 640, 832]}
+            sizes="(min-width: 992px) 26rem, 90vw"
+            class="foto"
+            loading="eager"
+          />
           <dl class="m-0">
             {stats.map(({ etiqueta, valor }) => (
               <div class="stat">
@@ -83,13 +89,13 @@ const stats = [
     overflow: hidden;
   }
 
-  .foto {
-    display: grid;
-    place-items: center;
+  // :global porque el <img> lo genera el componente Image
+  .ficha :global(.foto) {
+    display: block;
+    width: 100%;
+    height: auto;
     aspect-ratio: 4 / 5;
-    background: var(--lavanda-suave);
-    color: var(--tinta);
-    font-weight: 700;
+    object-fit: cover;
     border-bottom: 2px solid var(--tinta);
   }
 
