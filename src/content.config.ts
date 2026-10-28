@@ -19,6 +19,8 @@ const proyectos = defineCollection({
       tipo: z.string(),
       herramientas: z.array(z.string()).min(1),
       enlace: z.url().optional(),
+      // Dónde nació el proyecto (clase, cliente…); se muestra como un dato más en los metadatos
+      contexto: z.string().optional(),
     }),
 });
 

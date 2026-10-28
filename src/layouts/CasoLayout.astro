@@ -16,6 +16,7 @@ const metadatos = [
   { etiqueta: 'Duración', valor: data.duracion },
   { etiqueta: 'Tipo', valor: data.tipo },
   { etiqueta: 'Herramientas', valor: data.herramientas.join(', ') },
+  ...(data.contexto ? [{ etiqueta: 'Contexto', valor: data.contexto }] : []),
 ];
 ---
 

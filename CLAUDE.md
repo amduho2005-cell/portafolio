@@ -61,7 +61,7 @@ Lo que me diferencia es que no tengo que elegir entre diseñar y programar. Enti
 
 He creado tiendas online desde cero, APIs, apps de escritorio y juegos, tanto digitales como de mesa. Disfruto especialmente los proyectos donde la interacción es protagonista: cuando algo se siente bien al usarlo, no solo al verlo.
 
-*[PLACEHOLDER: párrafo personal — Amelia lo agrega después]*
+Soy autodidacta por naturaleza: cada proyecto es una excusa para aprender algo nuevo. Estudio becada por excelencia en la USFQ, me gusta liderar equipos y, además de programar, ilustro tanto en digital como a mano. Mi meta es crear mis propios videojuegos de forma independiente, uniendo diseño, código, ilustración y lo que ya conozco de la industria.
 *[PLACEHOLDER: foto]*
 
 ### Servicios
