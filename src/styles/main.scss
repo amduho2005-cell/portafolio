@@ -35,6 +35,22 @@
   outline-offset: 3px;
 }
 
+// Encabezado de sección compartido: antetítulo pequeño + título gigante
+.antetitulo {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.titulo-seccion {
+  // 8.5vw: "HERRAMIENTAS" (la palabra más larga) cabe a 360px
+  font-size: clamp(1.75rem, 8.5vw, 6rem);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
 .saltar {
   position: absolute;
   left: 1rem;

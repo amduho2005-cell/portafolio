@@ -1,0 +1,40 @@
+---
+import { contactos, email } from '../data/contacto';
+
+const [principal, ...otros] = contactos;
+---
+
+<section id="contacto" class="contacto" aria-labelledby="contacto-titulo">
+  <div class="container">
+    <p class="antetitulo">¿Continuar? ▶ Sí</p>
+    <h2 id="contacto-titulo" class="titulo-seccion">Trabajemos juntos</h2>
+    <p class="texto">
+      ¿Tienes una app, un juego o un sitio en mente? Cuéntamelo y lo diseñamos y construimos desde la primera idea.
+    </p>
+    <div class="d-flex flex-wrap gap-2">
+      <a href={principal.href} class="btn btn-primary btn-lg">Escríbeme a {email}</a>
+      {otros.map(({ href, label }) => (
+        <a href={href} class="btn btn-outline-primary btn-lg">{label}</a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .contacto {
+    padding-block: 5rem;
+    background: var(--lima);
+  }
+
+  .texto {
+    font-size: 1.25rem;
+    max-width: 36rem;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    // El email puede ser largo: que el botón parta línea en móvil en vez de desbordar
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+</style>

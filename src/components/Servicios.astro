@@ -1,0 +1,55 @@
+---
+const servicios = [
+  { titulo: 'Sitios web y tiendas online', texto: 'Diseño a medida, hechos desde cero y listos para publicar.' },
+  { titulo: 'Apps web', texto: 'Desde la experiencia de usuario hasta el frontend y el backend.' },
+  { titulo: 'Videojuegos y experiencias interactivas', texto: 'Prototipos, juegos completos y piezas lúdicas.' },
+  { titulo: 'Diseño UX/UI', texto: 'Para equipos que ya tienen desarrolladores y necesitan el diseño.' },
+];
+---
+
+<section class="servicios" aria-labelledby="servicios-titulo">
+  <div class="container">
+    <p class="antetitulo">Elige tu modo de juego</p>
+    <h2 id="servicios-titulo" class="titulo-seccion">Servicios</h2>
+    <ul class="list-unstyled row row-cols-1 row-cols-md-2 g-3 m-0">
+      {servicios.map(({ titulo, texto }, i) => (
+        <li class="col">
+          <div class="servicio">
+            <p class="numero" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+            <h3>{titulo}</h3>
+            <p class="m-0">{texto}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style lang="scss">
+  .servicios {
+    padding-block: 5rem;
+  }
+
+  .servicio {
+    height: 100%;
+    padding: 1.5rem;
+    background: var(--lavanda-suave);
+    border: 2px solid var(--tinta);
+    border-radius: 0.5rem;
+  }
+
+  .numero {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--lavanda);
+    -webkit-text-stroke: 2px var(--tinta);
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    margin-bottom: 0.5rem;
+  }
+</style>
