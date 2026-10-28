@@ -35,6 +35,13 @@
   outline-offset: 3px;
 }
 
+// Bootstrap quita el outline de .btn y usa una sombra al 50% que apenas se ve sobre lima: mismo foco que el resto
+.btn:focus-visible {
+  outline: 3px solid var(--foco);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
 // Encabezado de sección compartido: antetítulo pequeño + título gigante
 .antetitulo {
   font-weight: 700;
