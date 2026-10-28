@@ -1,0 +1,20 @@
+---
+import { getCollection, render } from 'astro:content';
+import CasoLayout from '../../layouts/CasoLayout.astro';
+
+export async function getStaticPaths() {
+  const proyectos = (await getCollection('proyectos')).sort((a, b) => a.data.orden - b.data.orden);
+  return proyectos.map((proyecto, i) => ({
+    params: { slug: proyecto.id },
+    // El último proyecto enlaza de vuelta al primero
+    props: { proyecto, numero: i + 1, siguiente: proyectos[(i + 1) % proyectos.length] },
+  }));
+}
+
+const { proyecto, numero, siguiente } = Astro.props;
+const { Content } = await render(proyecto);
+---
+
+<CasoLayout proyecto={proyecto} numero={numero} siguiente={siguiente}>
+  <Content />
+</CasoLayout>

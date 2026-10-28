@@ -1,0 +1,185 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  proyecto: CollectionEntry<'proyectos'>;
+  numero: number;
+  siguiente: CollectionEntry<'proyectos'>;
+}
+
+const { proyecto, numero, siguiente } = Astro.props;
+const { data } = proyecto;
+const metadatos = [
+  { etiqueta: 'Rol', valor: data.rol },
+  { etiqueta: 'Duración', valor: data.duracion },
+  { etiqueta: 'Tipo', valor: data.tipo },
+  { etiqueta: 'Herramientas', valor: data.herramientas.join(', ') },
+];
+---
+
+<BaseLayout title={`${data.titulo} · Amelia Duclos`} description={data.resumen}>
+  <article class="caso">
+    <header class="container cabecera">
+      <p class="antetitulo">Nivel {String(numero).padStart(2, '0')}</p>
+      <h1 class="titulo">{data.titulo}</h1>
+      <p class="resumen">{data.resumen}</p>
+    </header>
+
+    <div class="container">
+      <!-- Mismo transition:name que la tarjeta del carrusel: la portada "viaja" entre páginas -->
+      <div class="portada" transition:name={`portada-${proyecto.id}`}>
+        <Image
+          src={data.portada}
+          alt={data.portadaAlt}
+          widths={[600, 1000, 1600]}
+          sizes="(min-width: 1400px) 1296px, 94vw"
+          loading="eager"
+        />
+      </div>
+
+      <dl class="metadatos">
+        {metadatos.map(({ etiqueta, valor }) => (
+          <div>
+            <dt>{etiqueta}</dt>
+            <dd>{valor}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <div class="contenido">
+        <slot />
+      </div>
+
+      {data.enlace && (
+        <p class="mt-5">
+          <a href={data.enlace} class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+            Ver el proyecto <span aria-hidden="true">↗</span><span class="visually-hidden">(abre en una pestaña nueva)</span>
+          </a>
+        </p>
+      )}
+    </div>
+
+    <nav class="siguiente" aria-label="Siguiente proyecto">
+      <a href={`/proyectos/${siguiente.id}`} class="container d-block">
+        <span class="antetitulo d-block">Siguiente nivel ▶</span>
+        <span class="siguiente-titulo">{siguiente.data.titulo}</span>
+      </a>
+    </nav>
+  </article>
+</BaseLayout>
+
+<style lang="scss">
+  .cabecera {
+    padding-block: 3rem 2rem;
+  }
+
+  .titulo {
+    font-size: clamp(2rem, 8vw, 6rem);
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+    margin-bottom: 1rem;
+  }
+
+  .resumen {
+    font-size: 1.25rem;
+    max-width: 40rem;
+    margin: 0;
+  }
+
+  .portada {
+    border: 2px solid var(--tinta);
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    :global(img) {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+  }
+
+  // Metadatos como barra HUD
+  .metadatos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+    gap: 1px;
+    margin: 2rem 0 0;
+    background: var(--lavanda);
+    border: 2px solid var(--tinta);
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    div {
+      background: var(--tinta);
+      padding: 1rem 1.25rem;
+    }
+
+    dt {
+      color: var(--lima);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    dd {
+      color: var(--fondo);
+      font-weight: 700;
+      margin: 0;
+    }
+  }
+
+  // Secciones cortas del MDX (problema, proceso, solución, aprendizajes) en bloques
+  // El MDX llega como h2, p, h2, p… sueltos: las columnas CSS mantienen cada título con su texto
+  .contenido {
+    columns: 2 22rem;
+    column-gap: 3rem;
+    margin-top: 4rem;
+
+    :global(h2) {
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--tinta);
+      break-after: avoid;
+    }
+
+    :global(p) {
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      break-inside: avoid;
+    }
+  }
+
+  .siguiente {
+    margin-top: 5rem;
+    background: var(--lavanda);
+    border-top: 2px solid var(--tinta);
+
+    a {
+      padding-block: 3rem;
+      text-decoration: none;
+    }
+
+    a:hover .siguiente-titulo,
+    a:focus-visible .siguiente-titulo {
+      text-decoration: underline;
+      text-decoration-thickness: 0.08em;
+    }
+  }
+
+  .siguiente-titulo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.75rem, 7vw, 5rem);
+    line-height: 1;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+</style>

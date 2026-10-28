@@ -19,14 +19,15 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
       {proyectos.map(({ id, data }, i) => (
         <li class="slide">
           <article class="tarjeta" style={`--color: var(--${data.color})`}>
-            <Image
-              src={data.portada}
-              alt={data.portadaAlt}
-              widths={[480, 800, 1200]}
-              sizes="(min-width: 860px) 46rem, 85vw"
-              class="portada"
-              loading={i === 0 ? 'eager' : 'lazy'}
-            />
+            <div class="portada" transition:name={`portada-${id}`}>
+              <Image
+                src={data.portada}
+                alt={data.portadaAlt}
+                widths={[480, 800, 1200]}
+                sizes="(min-width: 860px) 46rem, 85vw"
+                loading={i === 0 ? 'eager' : 'lazy'}
+              />
+            </div>
             <div class="cuerpo">
               <p class="contador" aria-hidden="true">{num(i)}/{total}</p>
               <h3><a href={`/proyectos/${id}`}>{data.titulo}</a></h3>
@@ -93,11 +94,15 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
   }
 
   .portada {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
     border-bottom: 2px solid var(--tinta);
+
+    :global(img) {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
   }
 
   .cuerpo {
