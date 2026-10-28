@@ -9,7 +9,7 @@ const marquesina = 'Apps ✦ Juegos ✦ Sitios web ✦ ';
 
 <section class="hero" aria-labelledby="hero-titulo">
   <div class="hud">
-    <div class="container d-flex justify-content-between">
+    <div class="container hud-fila">
       <span>Nivel: freelance</span>
       <span aria-hidden="true">♥ ♥ ♥</span>
       <span aria-hidden="true" data-xp>XP 000</span>
@@ -61,6 +61,17 @@ const marquesina = 'Apps ✦ Juegos ✦ Sitios web ✦ ';
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding-block: 0.5rem;
+  }
+
+  // Laterales de igual ancho (1fr): los corazones quedan en el centro aunque los textos midan distinto
+  .hud-fila {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+
+    > :last-child {
+      justify-self: end;
+    }
   }
 
   .hero-cuerpo {
