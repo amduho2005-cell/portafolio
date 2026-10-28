@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+  <!-- Placeholder: reemplazar por la portada real (png/jpg/webp) y actualizar "portada" en el MDX -->
+  <rect width="1600" height="1000" fill="#c4f042"/>
+  <rect x="80" y="80" width="1440" height="840" fill="none" stroke="#1c1433" stroke-width="8" stroke-dasharray="32 20"/>
+  <text x="800" y="520" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="96" fill="#1c1433">Pawnee</text>
+  <text x="800" y="610" text-anchor="middle" font-family="system-ui, sans-serif" font-size="40" fill="#1c1433">portada placeholder</text>
+</svg>
