@@ -5,8 +5,9 @@ $lavanda: #9c88ff;
 $lima: #c4f042;
 $lavanda-suave: #d9d1ff;
 
-$font-display: "Unbounded", system-ui, sans-serif;
-$font-texto: "Manrope", system-ui, sans-serif;
+// Definidas por la API de fuentes de Astro (astro.config.mjs), con respaldos de métricas ajustadas
+$font-display: var(--font-unbounded);
+$font-texto: var(--font-manrope);
 
 // Overrides de Bootstrap
 $enable-gradients: false;

@@ -30,7 +30,7 @@ Portafolio personal de Amelia Duclos, desarrolladora fullstack y de videojuegos 
   - `--lavanda-suave` `#D9D1FF` — tarjetas, superficies
   - Verifica contraste AA en todo texto.
 - **PROHIBIDO usar gradientes** (ni en fondos, ni en textos, ni en botones, ni en sombras decorativas).
-- **Tipografía:** **Unbounded** 800 (display, títulos) + **Manrope** (texto), desde Google Fonts.
+- **Tipografía:** **Unbounded** 800 (display, títulos) + **Manrope** (texto), con la API de fuentes de Astro (`fonts` en `astro.config.mjs`, proveedor Google): se descargan al compilar y se sirven desde el propio sitio. No enlazar el CSS de Google Fonts.
 - **Hero:** grande, a pantalla completa, **NO centrado** — barra HUD arriba ("NIVEL: freelance · ♥♥♥ · XP"), nombre gigante a la izquierda, menú de juego con cursor ▶ a la derecha (Ver proyectos / Trabajemos juntos / Sobre mí), marquesina inclinada abajo.
 - **Logo:** usa un placeholder (ej. monograma "AD" en un componente `Logo.astro`) fácil de reemplazar después.
 - **Proyectos en el inicio:** carrusel (no grid).
