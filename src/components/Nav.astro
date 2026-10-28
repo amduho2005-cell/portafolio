@@ -6,7 +6,8 @@ const links = [
   { href: '/sobre-mi', label: 'Sobre mí' },
   { href: '/#contacto', label: 'Contacto' },
 ];
-const actual = Astro.url.pathname;
+// En producción la URL puede llegar como /sobre-mi/ (con barra final)
+const actual = Astro.url.pathname.replace(/(.)\/$/, '$1');
 ---
 
 <header class="nav-principal">

@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Herramientas from '../components/Herramientas.astro';
+
+const stats = [
+  { etiqueta: 'Clase', valor: 'Diseñadora + programadora' },
+  { etiqueta: 'Formación', valor: 'Diseño en Medios Interactivos, USFQ' },
+  { etiqueta: 'Especialidad', valor: 'Interacción que se siente bien' },
+];
+---
+
+<BaseLayout title="Sobre mí · Amelia Duclos">
+  <section class="container sobre" aria-labelledby="sobre-titulo">
+    <p class="antetitulo">Selección de personaje</p>
+    <h1 id="sobre-titulo" class="titulo-seccion">Sobre mí</h1>
+
+    <div class="row gy-5 align-items-start">
+      <div class="col-lg-7 texto">
+        <p class="destacado">
+          Soy Amelia, desarrolladora fullstack y de videojuegos, con formación en Diseño en Medios Interactivos en la USFQ.
+        </p>
+        <p>
+          Lo que me diferencia es que no tengo que elegir entre diseñar y programar. Entiendo a quién va dirigido un
+          producto, diseño su experiencia y lo construyo yo misma. Así nada se pierde entre el diseño y el código, y el
+          resultado se ve y funciona como se pensó.
+        </p>
+        <p>
+          He creado tiendas online desde cero, APIs, apps de escritorio y juegos, tanto digitales como de mesa. Disfruto
+          especialmente los proyectos donde la interacción es protagonista: cuando algo se siente bien al usarlo, no solo
+          al verlo.
+        </p>
+        <!-- shortcut: párrafo personal pendiente, Amelia lo agrega después -->
+        <p>[Pendiente] Párrafo personal.</p>
+      </div>
+
+      <aside class="col-lg-4 offset-lg-1" aria-label="Ficha de personaje">
+        <div class="ficha">
+          <!-- shortcut: foto placeholder, reemplazar por <Image> con la foto real -->
+          <div class="foto" role="img" aria-label="Foto de Amelia Duclos (pendiente)">
+            <span aria-hidden="true">Foto pendiente</span>
+          </div>
+          <dl class="m-0">
+            {stats.map(({ etiqueta, valor }) => (
+              <div class="stat">
+                <dt>{etiqueta}</dt>
+                <dd class="m-0">{valor}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Herramientas />
+</BaseLayout>
+
+<style lang="scss">
+  .sobre {
+    padding-block: 3rem 2rem;
+  }
+
+  .texto p {
+    font-size: 1.125rem;
+    max-width: 40rem;
+  }
+
+  .texto .destacado {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .ficha {
+    background: var(--tinta);
+    color: var(--fondo);
+    border: 2px solid var(--tinta);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .foto {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 4 / 5;
+    background: var(--lavanda-suave);
+    color: var(--tinta);
+    font-weight: 700;
+    border-bottom: 2px solid var(--tinta);
+  }
+
+  .stat {
+    padding: 0.875rem 1.25rem;
+
+    & + & {
+      border-top: 1px solid var(--lavanda);
+    }
+  }
+
+  dt {
+    color: var(--lima);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    font-weight: 700;
+  }
+</style>
