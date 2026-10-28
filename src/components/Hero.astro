@@ -1,0 +1,148 @@
+---
+const menu = [
+  { href: '#proyectos', label: 'Ver proyectos' },
+  { href: '#contacto', label: 'Trabajemos juntos' },
+  { href: '/sobre-mi', label: 'Sobre mí' },
+];
+const marquesina = 'Apps ✦ Juegos ✦ Sitios web ✦ ';
+---
+
+<section class="hero" aria-labelledby="hero-titulo">
+  <div class="hud">
+    <div class="container d-flex justify-content-between">
+      <span>Nivel: freelance</span>
+      <span aria-hidden="true">♥ ♥ ♥</span>
+      <span aria-hidden="true">XP 000</span>
+    </div>
+  </div>
+
+  <div class="container hero-cuerpo">
+    <h1 id="hero-titulo" class="nombre">
+      <span>Amelia</span>
+      <span class="nombre-2">Duclos</span>
+    </h1>
+
+    <div class="row gy-4 align-items-end">
+      <div class="col-md-6">
+        <p class="rol">Desarrolladora fullstack y de videojuegos</p>
+        <p class="frase">
+          Diseño y construyo apps, juegos y sitios web, desde la primera idea en Figma hasta el código publicado.
+        </p>
+      </div>
+      <nav class="col-md-5 offset-md-1 col-lg-4 offset-lg-2" aria-label="Empezar">
+        <ul class="menu list-unstyled m-0">
+          {menu.map(({ href, label }) => (
+            <li><a href={href}>{label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="marquesina" aria-hidden="true">
+    <span>{marquesina.repeat(6)}</span>
+  </div>
+</section>
+
+<style lang="scss">
+  .hero {
+    // Pantalla completa menos la barra de navegación
+    min-height: calc(100svh - 4.75rem);
+    display: flex;
+    flex-direction: column;
+    overflow: clip;
+  }
+
+  .hud {
+    background: var(--tinta);
+    color: var(--lima);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-block: 0.5rem;
+  }
+
+  .hero-cuerpo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 2.5rem;
+  }
+
+  .nombre {
+    font-size: clamp(2.6rem, 14.5vw, 13rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+
+    span {
+      display: block;
+    }
+  }
+
+  // Asimetría: la segunda línea se desplaza y se corta en el borde derecho
+  @media (min-width: 768px) {
+    .nombre-2 {
+      margin-left: 0.75em;
+      white-space: nowrap;
+    }
+  }
+
+  .rol {
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .frase {
+    font-size: 1.125rem;
+    max-width: 32rem;
+    margin: 0;
+  }
+
+  .menu a {
+    display: block;
+    padding: 0.5rem 0.75rem 0.5rem 2rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: 0.25rem;
+    position: relative;
+  }
+
+  .menu a::before {
+    content: '▶';
+    position: absolute;
+    left: 0.6rem;
+    opacity: 0;
+  }
+
+  // Selección de menú de juego: la primera opción está activa hasta que otra recibe hover o foco
+  .menu a:hover,
+  .menu a:focus-visible,
+  .menu:not(:hover, :focus-within) li:first-child a {
+    background: var(--lima);
+    border-color: var(--tinta);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  .marquesina {
+    background: var(--lavanda);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding-block: 0.75rem;
+    width: 110%;
+    margin-left: -5%;
+    margin-bottom: 2rem;
+    transform: rotate(-2deg);
+  }
+</style>

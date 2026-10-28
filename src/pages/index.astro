@@ -1,25 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-// Contenido temporal para revisar tokens; el paso 4 lo reemplaza con el Hero.
-const tokens = ['fondo', 'tinta', 'lavanda', 'lima', 'lavanda-suave'];
+import Hero from '../components/Hero.astro';
 ---
 
 <BaseLayout>
-  <div class="container py-5">
-    <h1 class="display-3 text-uppercase">Amelia Duclos</h1>
-    <p class="lead">Desarrolladora fullstack y de videojuegos.</p>
-    <p>
-      <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
-      <a href="#contacto" class="btn btn-outline-primary">Trabajemos juntos</a>
-    </p>
-    <div class="row g-2 mt-4">
-      {tokens.map((t) => (
-        <div class="col-6 col-md">
-          <div class="border rounded" style={`background: var(--${t}); height: 4rem`}></div>
-          <code>--{t}</code>
-        </div>
-      ))}
-    </div>
-  </div>
+  <Hero />
 </BaseLayout>
