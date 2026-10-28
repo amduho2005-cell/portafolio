@@ -1,0 +1,173 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+const proyectos = (await getCollection('proyectos')).sort((a, b) => a.data.orden - b.data.orden);
+const total = String(proyectos.length + 1).padStart(2, '0');
+const num = (i: number) => String(i + 1).padStart(2, '0');
+---
+
+<section id="proyectos" class="carrusel" aria-labelledby="proyectos-titulo">
+  <div class="container">
+    <p class="antetitulo">Selecciona un nivel</p>
+    <h2 id="proyectos-titulo" class="titulo">Proyectos</h2>
+  </div>
+
+  <!-- Versión sin JS: scroll horizontal nativo con snap. El paso 11 añade la capa animada. -->
+  <div class="pista" role="region" aria-label="Proyectos, desliza para ver más" tabindex="0">
+    <ol class="list-unstyled m-0">
+      {proyectos.map(({ id, data }, i) => (
+        <li class="slide">
+          <article class="tarjeta" style={`--color: var(--${data.color})`}>
+            <Image
+              src={data.portada}
+              alt={data.portadaAlt}
+              widths={[480, 800, 1200]}
+              sizes="(min-width: 860px) 46rem, 85vw"
+              class="portada"
+              loading={i === 0 ? 'eager' : 'lazy'}
+            />
+            <div class="cuerpo">
+              <p class="contador" aria-hidden="true">{num(i)}/{total}</p>
+              <h3><a href={`/proyectos/${id}`}>{data.titulo}</a></h3>
+              <p class="resumen">{data.resumen}</p>
+              <p class="tipo">{data.tipo}</p>
+            </div>
+          </article>
+        </li>
+      ))}
+      <li class="slide">
+        <article class="tarjeta tarjeta-cta">
+          <div class="cuerpo">
+            <p class="contador" aria-hidden="true">{total}/{total}</p>
+            <h3><a href="#contacto">¿Tu proyecto aquí?</a></h3>
+            <p class="resumen">El siguiente nivel puede ser el tuyo. Trabajemos juntos.</p>
+          </div>
+        </article>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<style lang="scss">
+  .carrusel {
+    padding-block: 5rem;
+    // Alinea el inicio de la pista con el .container de Bootstrap (máx. 1320px)
+    --margen: max(0.75rem, (100% - 1320px) / 2 + 0.75rem);
+  }
+
+  .antetitulo {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .titulo {
+    font-size: clamp(2.5rem, 9vw, 6rem);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .pista {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--margen);
+    padding-block: 0.5rem 1.5rem;
+    scrollbar-color: var(--tinta) var(--lavanda-suave);
+
+    ol {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      padding-inline: var(--margen);
+    }
+  }
+
+  .slide {
+    width: min(85vw, 46rem);
+    scroll-snap-align: start;
+  }
+
+  .tarjeta {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--color, var(--lavanda-suave));
+    border: 2px solid var(--tinta);
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    &:focus-within {
+      outline: 3px solid var(--tinta);
+      outline-offset: 3px;
+    }
+  }
+
+  .portada {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-bottom: 2px solid var(--tinta);
+  }
+
+  .cuerpo {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .contador {
+    font-family: var(--font-display);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+
+    a {
+      text-decoration: none;
+
+      // Toda la tarjeta es clicable; el foco se muestra en la tarjeta (:focus-within)
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+
+  .resumen {
+    max-width: 36rem;
+  }
+
+  .tipo {
+    display: inline-block;
+    margin: 0;
+    padding: 0.25rem 0.75rem;
+    background: var(--tinta);
+    color: var(--lima);
+    font-weight: 700;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+  }
+
+  .tarjeta-cta {
+    justify-content: center;
+    background: var(--tinta);
+    color: var(--fondo);
+    min-height: 20rem;
+
+    h3 a {
+      color: var(--lima);
+    }
+  }
+</style>
