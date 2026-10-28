@@ -144,5 +144,10 @@ const marquesina = 'Apps ✦ Juegos ✦ Sitios web ✦ ';
     margin-left: -5%;
     margin-bottom: 2rem;
     transform: rotate(-2deg);
+
+    // inline-block para que GSAP pueda desplazarlo (los inline no aceptan transform)
+    span {
+      display: inline-block;
+    }
   }
 </style>

@@ -11,9 +11,9 @@ const inventario = [
 
 <section class="herramientas" aria-labelledby="herramientas-titulo">
   <div class="container">
-    <p class="antetitulo">Inventario</p>
-    <h2 id="herramientas-titulo" class="titulo-seccion">Herramientas</h2>
-    <dl class="m-0">
+    <p class="antetitulo" data-entrada>Inventario</p>
+    <h2 id="herramientas-titulo" class="titulo-seccion" data-entrada>Herramientas</h2>
+    <dl class="m-0" data-entrada="grupo">
       {inventario.map(({ categoria, items }) => (
         <div class="fila">
           <dt>{categoria}</dt>

@@ -21,7 +21,7 @@ const metadatos = [
 
 <BaseLayout title={`${data.titulo} · Amelia Duclos`} description={data.resumen}>
   <article class="caso">
-    <header class="container cabecera">
+    <header class="container cabecera" data-entrada="grupo">
       <p class="antetitulo">Nivel {String(numero).padStart(2, '0')}</p>
       <h1 class="titulo">{data.titulo}</h1>
       <p class="resumen">{data.resumen}</p>
@@ -39,7 +39,7 @@ const metadatos = [
         />
       </div>
 
-      <dl class="metadatos">
+      <dl class="metadatos" data-entrada="grupo">
         {metadatos.map(({ etiqueta, valor }) => (
           <div>
             <dt>{etiqueta}</dt>
@@ -48,7 +48,7 @@ const metadatos = [
         ))}
       </dl>
 
-      <div class="contenido">
+      <div class="contenido" data-entrada="grupo">
         <slot />
       </div>
 

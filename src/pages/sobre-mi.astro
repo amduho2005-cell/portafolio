@@ -11,11 +11,11 @@ const stats = [
 
 <BaseLayout title="Sobre mí · Amelia Duclos">
   <section class="container sobre" aria-labelledby="sobre-titulo">
-    <p class="antetitulo">Selección de personaje</p>
-    <h1 id="sobre-titulo" class="titulo-seccion">Sobre mí</h1>
+    <p class="antetitulo" data-entrada>Selección de personaje</p>
+    <h1 id="sobre-titulo" class="titulo-seccion" data-entrada>Sobre mí</h1>
 
     <div class="row gy-5 align-items-start">
-      <div class="col-lg-7 texto">
+      <div class="col-lg-7 texto" data-entrada="grupo">
         <p class="destacado">
           Soy Amelia, desarrolladora fullstack y de videojuegos, con formación en Diseño en Medios Interactivos en la USFQ.
         </p>
@@ -34,7 +34,7 @@ const stats = [
       </div>
 
       <aside class="col-lg-4 offset-lg-1" aria-label="Ficha de personaje">
-        <div class="ficha">
+        <div class="ficha" data-entrada>
           <!-- shortcut: foto placeholder, reemplazar por <Image> con la foto real -->
           <div class="foto" role="img" aria-label="Foto de Amelia Duclos (pendiente)">
             <span aria-hidden="true">Foto pendiente</span>

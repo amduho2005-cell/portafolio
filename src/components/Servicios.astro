@@ -9,9 +9,9 @@ const servicios = [
 
 <section class="servicios" aria-labelledby="servicios-titulo">
   <div class="container">
-    <p class="antetitulo">Elige tu modo de juego</p>
-    <h2 id="servicios-titulo" class="titulo-seccion">Servicios</h2>
-    <ul class="list-unstyled row row-cols-1 row-cols-md-2 g-3 m-0">
+    <p class="antetitulo" data-entrada>Elige tu modo de juego</p>
+    <h2 id="servicios-titulo" class="titulo-seccion" data-entrada>Servicios</h2>
+    <ul class="list-unstyled row row-cols-1 row-cols-md-2 g-3 m-0" data-entrada="grupo">
       {servicios.map(({ titulo, texto }, i) => (
         <li class="col">
           <div class="servicio">

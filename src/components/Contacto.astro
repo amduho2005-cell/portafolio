@@ -6,12 +6,12 @@ const [principal, ...otros] = contactos;
 
 <section id="contacto" class="contacto" aria-labelledby="contacto-titulo">
   <div class="container">
-    <p class="antetitulo">¿Continuar? ▶ Sí</p>
-    <h2 id="contacto-titulo" class="titulo-seccion">Trabajemos juntos</h2>
-    <p class="texto">
+    <p class="antetitulo" data-entrada>¿Continuar? ▶ Sí</p>
+    <h2 id="contacto-titulo" class="titulo-seccion" data-entrada>Trabajemos juntos</h2>
+    <p class="texto" data-entrada>
       ¿Tienes una app, un juego o un sitio en mente? Cuéntamelo y lo diseñamos y construimos desde la primera idea.
     </p>
-    <div class="d-flex flex-wrap gap-2">
+    <div class="d-flex flex-wrap gap-2" data-entrada="grupo">
       <a href={principal.href} class="btn btn-primary btn-lg">Escríbeme a {email}</a>
       {otros.map(({ href, label }) => (
         <a href={href} class="btn btn-outline-primary btn-lg">{label}</a>
