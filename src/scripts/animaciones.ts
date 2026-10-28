@@ -1,10 +1,12 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { iniciarCarrusel } from './carrusel';
+import { iniciarKonami, iniciarXP } from './microinteracciones';
 
 gsap.registerPlugin(ScrollTrigger);
 
 let mm: gsap.MatchMedia | undefined;
+let pararXP: (() => void) | undefined;
 
 // Las animaciones solo existen si la persona no pidió movimiento reducido; sin ellas todo se ve en su sitio
 function iniciar() {
@@ -15,6 +17,7 @@ function iniciar() {
   });
   // Fuera del bloque anterior: botones y flechas también sirven con reduced-motion
   iniciarCarrusel(mm);
+  pararXP = iniciarXP();
 }
 
 function introHero() {
@@ -56,4 +59,9 @@ function entradas() {
 
 // Con View Transitions el script se ejecuta una vez: hay que iniciar en cada página y limpiar antes del cambio
 document.addEventListener('astro:page-load', iniciar);
-document.addEventListener('astro:before-swap', () => mm?.revert());
+document.addEventListener('astro:before-swap', () => {
+  mm?.revert();
+  pararXP?.();
+});
+// El código Konami escucha el documento, que sobrevive a la navegación: se registra una sola vez
+iniciarKonami();

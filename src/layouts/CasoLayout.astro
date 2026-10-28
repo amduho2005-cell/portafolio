@@ -20,7 +20,7 @@ const metadatos = [
 ---
 
 <BaseLayout title={`${data.titulo} · Amelia Duclos`} description={data.resumen}>
-  <article class="caso">
+  <article class="caso" data-xp-id={`proyecto-${proyecto.id}`}>
     <header class="container cabecera" data-entrada="grupo">
       <p class="antetitulo">Nivel {String(numero).padStart(2, '0')}</p>
       <h1 class="titulo">{data.titulo}</h1>

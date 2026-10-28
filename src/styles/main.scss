@@ -51,6 +51,62 @@
   margin-bottom: 2rem;
 }
 
+// Cursor de juego: flecha pixelada. Solo con mouse; en táctil no hay cursor
+$cursor-flecha: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M2 2v22l6-6 4 10 4-2-4-10h8z' fill='%231c1433' stroke='%23c4f042' stroke-width='2' stroke-linejoin='miter'/%3E%3C/svg%3E";
+$cursor-accion: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M2 2v22l6-6 4 10 4-2-4-10h8z' fill='%23c4f042' stroke='%231c1433' stroke-width='2' stroke-linejoin='miter'/%3E%3C/svg%3E";
+
+@media (pointer: fine) {
+  html {
+    cursor: url($cursor-flecha) 2 2, auto;
+  }
+
+  a,
+  button,
+  summary,
+  label {
+    cursor: url($cursor-accion) 2 2, pointer;
+  }
+}
+
+// Aviso flotante para XP y easter egg (lo maneja microinteracciones.ts)
+.aviso-juego {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 20;
+  padding: 0.5rem 1rem;
+  background: var(--tinta);
+  color: var(--lima);
+  font-family: var(--font-display);
+  font-weight: 800;
+  border: 2px solid var(--lima);
+  border-radius: 0.25rem;
+  opacity: 0;
+  pointer-events: none;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transform: translateY(1rem);
+    transition:
+      opacity 0.2s,
+      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    &.visible {
+      transform: none;
+    }
+  }
+}
+
+// Easter egg (código Konami): fondo y lima se intercambian. Todos los pares de texto siguen pasando AA
+.fiesta {
+  --fondo: #{$lima};
+  --lima: #{$fondo};
+  --bs-body-bg: #{$lima};
+}
+
 .saltar {
   position: absolute;
   left: 1rem;
