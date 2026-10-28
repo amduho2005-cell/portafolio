@@ -1,41 +1,25 @@
 ---
-import '../styles/main.scss';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Página temporal para revisar tokens y fuentes; el paso 3 la reemplaza con BaseLayout.
+// Contenido temporal para revisar tokens; el paso 4 lo reemplaza con el Hero.
 const tokens = ['fondo', 'tinta', 'lavanda', 'lima', 'lavanda-suave'];
 ---
 
-<html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&family=Unbounded:wght@800&display=swap"
-			rel="stylesheet"
-		/>
-		<title>Amelia Duclos</title>
-	</head>
-	<body>
-		<main class="container py-5">
-			<h1 class="display-3 text-uppercase">Amelia Duclos</h1>
-			<p class="lead">Desarrolladora fullstack y de videojuegos.</p>
-			<p>
-				<a href="#" class="btn btn-primary">Ver proyectos</a>
-				<a href="#" class="btn btn-outline-primary">Trabajemos juntos</a>
-			</p>
-			<div class="row g-2 mt-4">
-				{tokens.map((t) => (
-					<div class="col-6 col-md">
-						<div class="border rounded" style={`background: var(--${t}); height: 4rem`}></div>
-						<code>--{t}</code>
-					</div>
-				))}
-			</div>
-		</main>
-	</body>
-</html>
+<BaseLayout>
+  <div class="container py-5">
+    <h1 class="display-3 text-uppercase">Amelia Duclos</h1>
+    <p class="lead">Desarrolladora fullstack y de videojuegos.</p>
+    <p>
+      <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+      <a href="#contacto" class="btn btn-outline-primary">Trabajemos juntos</a>
+    </p>
+    <div class="row g-2 mt-4">
+      {tokens.map((t) => (
+        <div class="col-6 col-md">
+          <div class="border rounded" style={`background: var(--${t}); height: 4rem`}></div>
+          <code>--{t}</code>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

@@ -26,4 +26,25 @@
   --lavanda-suave: #{$lavanda-suave};
   --font-display: #{$font-display};
   --font-texto: #{$font-texto};
+  --foco: var(--tinta);
+}
+
+// Foco visible en todo el sitio; las secciones oscuras cambian --foco a --lima
+:focus-visible {
+  outline: 3px solid var(--foco);
+  outline-offset: 3px;
+}
+
+.saltar {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 10;
+  padding: 0.5rem 1rem;
+  background: var(--lima);
+  font-weight: 700;
+
+  &:focus {
+    top: 1rem;
+  }
 }

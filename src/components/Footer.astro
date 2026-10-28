@@ -1,0 +1,44 @@
+---
+// shortcut: contactos placeholder, reemplazar cuando Amelia los defina (CLAUDE.md → Contacto)
+const contactos = [
+  { href: 'mailto:hola@ejemplo.com', label: 'Email' },
+  { href: 'https://www.linkedin.com/', label: 'LinkedIn' },
+  { href: 'https://github.com/', label: 'GitHub' },
+];
+---
+
+<footer class="pie">
+  <div class="container py-5 d-flex flex-column flex-md-row justify-content-between gap-4">
+    <div>
+      <p class="pie-titulo">¿Jugamos?</p>
+      <p class="m-0">Disponible para proyectos freelance.</p>
+    </div>
+    <ul class="list-unstyled d-flex flex-wrap gap-3 m-0 align-self-md-end">
+      {contactos.map(({ href, label }) => (
+        <li><a href={href}>{label}</a></li>
+      ))}
+    </ul>
+  </div>
+  <p class="container pb-4 m-0 small">© {new Date().getFullYear()} Amelia Duclos</p>
+</footer>
+
+<style lang="scss">
+  .pie {
+    background: var(--tinta);
+    color: var(--fondo);
+    --foco: var(--lima);
+  }
+
+  .pie-titulo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.75rem, 6vw, 3rem);
+    color: var(--lima);
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    color: var(--lima);
+    font-weight: 700;
+  }
+</style>

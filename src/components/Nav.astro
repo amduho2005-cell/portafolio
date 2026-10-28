@@ -1,0 +1,63 @@
+---
+import Logo from './Logo.astro';
+
+const links = [
+  { href: '/#proyectos', label: 'Proyectos' },
+  { href: '/sobre-mi', label: 'Sobre mí' },
+  { href: '/#contacto', label: 'Contacto' },
+];
+const actual = Astro.url.pathname;
+---
+
+<header class="nav-principal">
+  <nav class="container d-flex align-items-center justify-content-between gap-3 py-3" aria-label="Principal">
+    <a href="/" class="d-inline-flex align-items-center gap-2 text-decoration-none">
+      <Logo />
+      <span class="visually-hidden">Amelia Duclos, inicio</span>
+    </a>
+    <ul class="list-unstyled d-flex flex-wrap gap-1 gap-sm-3 m-0">
+      {links.map(({ href, label }) => (
+        <li>
+          <a href={href} aria-current={actual === href ? 'page' : undefined}>{label}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style lang="scss">
+  ul a {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 0.25rem;
+  }
+
+  // Cursor de selección de menú de juego
+  ul a::before {
+    content: '▶ ';
+    opacity: 0;
+  }
+
+  ul a:hover::before,
+  ul a:focus-visible::before,
+  ul a[aria-current='page']::before {
+    opacity: 1;
+  }
+
+  ul a[aria-current='page'] {
+    background: var(--lima);
+  }
+
+  // En móvil el ▶ no cabe: los tres enlaces deben entrar en una línea desde 360px
+  @media (max-width: 575.98px) {
+    ul a {
+      font-size: 0.875rem;
+    }
+
+    ul a::before {
+      display: none;
+    }
+  }
+</style>
