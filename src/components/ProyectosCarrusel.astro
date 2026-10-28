@@ -8,16 +8,24 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
 ---
 
 <section id="proyectos" class="carrusel" aria-labelledby="proyectos-titulo">
-  <div class="container">
-    <p class="antetitulo" data-entrada>Selecciona un nivel</p>
-    <h2 id="proyectos-titulo" class="titulo-seccion" data-entrada>Proyectos</h2>
+  <div class="container d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4">
+    <div>
+      <p class="antetitulo" data-entrada>Selecciona un nivel</p>
+      <h2 id="proyectos-titulo" class="titulo-seccion m-0" data-entrada>Proyectos</h2>
+    </div>
+    <!-- Ocultos sin JS: los muestra carrusel.ts -->
+    <div class="controles d-flex gap-2" hidden>
+      <button type="button" data-paso="-1" aria-label="Proyecto anterior">◀</button>
+      <button type="button" data-paso="1" aria-label="Proyecto siguiente">▶</button>
+    </div>
   </div>
+  <p class="visually-hidden" aria-live="polite" data-anuncio></p>
 
-  <!-- Versión sin JS: scroll horizontal nativo con snap. El paso 11 añade la capa animada. -->
-  <div class="pista" role="region" aria-label="Proyectos, desliza para ver más" tabindex="0">
+  <!-- Base sin JS: scroll horizontal nativo con snap. carrusel.ts añade botones, color y, en escritorio, el scroll fijado. -->
+  <div class="pista" role="region" aria-label="Proyectos, desliza o usa las flechas" tabindex="0">
     <ol class="list-unstyled m-0">
       {proyectos.map(({ id, data }, i) => (
-        <li class="slide">
+        <li class="slide" data-color={data.color} data-titulo={data.titulo}>
           <article class="tarjeta" style={`--color: var(--${data.color})`}>
             <div class="portada" transition:name={`portada-${id}`}>
               <Image
@@ -37,7 +45,7 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
           </article>
         </li>
       ))}
-      <li class="slide">
+      <li class="slide" data-color="fondo" data-titulo="¿Tu proyecto aquí?">
         <article class="tarjeta tarjeta-cta">
           <div class="cuerpo">
             <p class="contador" aria-hidden="true">{total}/{total}</p>
@@ -55,6 +63,36 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
     padding-block: 5rem;
     // Alinea el inicio de la pista con el .container de Bootstrap (máx. 1320px)
     --margen: max(0.75rem, (100% - 1320px) / 2 + 0.75rem);
+    // carrusel.ts cambia --fondo-carrusel al color del proyecto activo
+    background-color: var(--fondo-carrusel, var(--fondo));
+    transition: background-color 0.4s;
+  }
+
+  .controles button {
+    width: 3rem;
+    aspect-ratio: 1;
+    background: var(--tinta);
+    color: var(--lima);
+    border: 2px solid var(--tinta);
+    border-radius: 0.25rem;
+    font-size: 1.125rem;
+
+    // Solo con mouse: en pantallas táctiles el hover se queda "pegado" tras tocar
+    @media (hover: hover) {
+      &:hover {
+        background: var(--lima);
+        color: var(--tinta);
+      }
+    }
+  }
+
+  // Solo en modo fijado (escritorio y sin reduced-motion): la tarjeta activa se endereza y crece
+  .carrusel.animado .slide {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .carrusel.animado .slide:not(.activa) {
+    transform: scale(0.88) rotate(-3deg);
   }
 
   .pista {
@@ -65,6 +103,7 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
     scrollbar-color: var(--tinta) var(--lavanda-suave);
 
     ol {
+      position: relative; // referencia para offsetLeft de las slides
       display: flex;
       gap: 1.5rem;
       width: max-content;

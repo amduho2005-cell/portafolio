@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { iniciarCarrusel } from './carrusel';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +13,8 @@ function iniciar() {
     introHero();
     entradas();
   });
+  // Fuera del bloque anterior: botones y flechas también sirven con reduced-motion
+  iniciarCarrusel(mm);
 }
 
 function introHero() {
